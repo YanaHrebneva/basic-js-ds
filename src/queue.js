@@ -17,32 +17,27 @@ const { NotImplementedError } = require('../extensions/index.js');
   constructor() {
     this.head = null;
     this.tail = null;
-    this.length = 0;
 }
 
   getUnderlyingList() {
-
+    return this.head;
   }
 
   enqueue(value) {
-    const node = new Node(value); 
-
-    if (this.head) {
-        this.tail.next = node;
-        this.tail = node;
+    const elem = {value, next: null};
+    if (!this.head) {
+      this.head = elem;
+      this.tail = elem;
     } else {
-        this.head = node;
-        this.tail = node 
+      this.tail.next = elem;
+      this.tail = this.tail.next;
     }
-    this.length++;
-}
+  }
 
   dequeue() {
-  const current = this.head;
+  const current = this.head.value;
   this.head = this.head.next;
-  this.length--;
-
-  return current.value;
+  return current;
   }
 }
 
